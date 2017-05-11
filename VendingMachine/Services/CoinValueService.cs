@@ -12,7 +12,7 @@ namespace VendingMachine.Services
             _currency = curreny;
         }
 
-        public CoinValueViewModel GetCoinValue(int coinWeight, int coinSize)
+        public CoinValueViewModel GetCoinValue(double coinWeight, double coinSize)
         {
             CoinValueViewModel model = new CoinValueViewModel();
 

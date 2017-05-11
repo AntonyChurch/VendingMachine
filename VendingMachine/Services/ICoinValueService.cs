@@ -4,6 +4,6 @@ namespace VendingMachine.Services
 {
     public interface ICoinValueService
     {
-        CoinValueViewModel GetCoinValue(int coinWeight, int coinSize);
+        CoinValueViewModel GetCoinValue(double coinWeight, double coinSize);
     }
 }
