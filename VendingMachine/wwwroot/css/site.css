@@ -17,21 +17,18 @@ textarea {
     max-width: 280px;
 }
 
-/* Carousel */
-.carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
+.vending-machine-items-container{
+    background-color: #666;
 }
 
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
-    width: 100%;
+.vending-machine-item{
+    background-color: #999;
+    height: 250px;
+    padding:10px;
+    border:2px green solid;
 }
 
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-    /* Hide captions */
-    .carousel-caption {
-        display: none;
-    }
+.vending-machine-display{
+    background-color: #000;
+    color: #ff0000;
 }
