@@ -1,3 +1,5 @@
+@model VendingMachine.ViewModels.IndexViewModel
+
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -28,7 +30,15 @@
 
 <div class="row">
     <div class="col-md-12 vending-machine-display">
-        <h1 id="display-text">$0 - Please insert coins</h1>
+        @if(Model.UserTotal == 0)
+        {
+            <h1 id="display-text">$0 - Please insert coins</h1>
+        }
+        else
+        {
+            <h1 id="display-text">@Model.UserTotal.ToString("C")</h1>
+        }
+        
     </div>
 </div>
 
@@ -52,14 +62,45 @@
     <div class="col-md-6 form-horizontal">
         <div class="form-group">
             <label for="coin-return">Coin Return</label>
-            <textarea id="coin-return" name="coin-return" class="form-control" disabled></textarea>
+            <div id="coin-return" name="coin-return" class="dispencary-div">
+                <ul>
+                    @if(Model.CoinsToCollect.Count > 0)
+                    {
+                        @foreach(string coin in Model.CoinsToCollect)
+                        {
+                            <li>
+                                @coin
+                            </li>
+                        }
+                    }    
+                    else
+                    {
+                        <li>Coin return is empty</li>
+                    }                
+                </ul>
+            </div>
         </div>
         <div class="form-group">
             <button id="take-all-coins-button" class="btn btn-success">Take All</button>
         </div>
         <div class="form-group">
             <label for="dispencary">Dispencary</label>
-            <textarea id="dispencary" name="dispencary" class="form-control" disabled></textarea>
+            <div id="dispencary" name="dispencary" class="dispencary-div">
+                <ul>
+                    @if(Model.ItemsToCollect.Count > 0)
+                    {
+                        @foreach(string item in Model.ItemsToCollect)
+                        {
+                            <li>@item</li>
+                        }
+                    }
+                    else
+                    {
+                        <li>No items to collect</li>
+                    }
+                    
+                </ul>
+            </div>
         </div>
         <div class="form-group">
             <button id="take-all-items-button" class="btn btn-success">Take All</button>

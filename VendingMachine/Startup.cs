@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -7,6 +8,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using VendingMachine.Currencies;
+using VendingMachine.Services;
 
 namespace VendingMachine
 {
@@ -29,6 +32,11 @@ namespace VendingMachine
         {
             // Add framework services.
             services.AddMvc();
+
+            //Add Default Currency and CoinService to DI
+            services.AddTransient<ICurrency, USDCurrency>();
+
+            services.AddTransient<ICoinValueService, CoinValueService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +63,11 @@ namespace VendingMachine
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            var cultureInfo = new CultureInfo("en-US");
+
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
         }
     }
 }

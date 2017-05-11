@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using VendingMachine.ViewModels;
 
 namespace VendingMachine.Controllers
 {
@@ -10,11 +11,22 @@ namespace VendingMachine.Controllers
     {
         public IActionResult Index()
         {
-            //int thing = int.MaxValue;
+            IndexViewModel viewModel = new IndexViewModel();
+            
+            return View(viewModel);
+        }
 
-            //int cals = thing + 1;
+        [HttpPost]
+        public IActionResult Index(IndexViewModel model)
+        {
 
-            return View();
+
+            return View(model);
+        }
+
+        public IActionResult GetCoinValue(int coinWeight, int coinSize)
+        {
+            return Json(true);
         }
 
         public IActionResult Error()
