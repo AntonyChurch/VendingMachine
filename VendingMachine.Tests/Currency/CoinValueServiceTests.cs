@@ -10,7 +10,7 @@ namespace VendingMachine.Tests.Currency
         [Fact]
         public void CorrectInputProducesCorrectOutputUSDCurrency()
         {
-            //Create a service with the USD Currency (could mock in future)
+            //Create a service with the USD Currency (could mock with more time)
             ICoinValueService service = new CoinValueService(new USDCurrency());
 
             CoinValueViewModel coinValue = service.GetCoinValue(2.5, 19.05);
@@ -41,7 +41,7 @@ namespace VendingMachine.Tests.Currency
         [Fact]
         public void IncorrectInputProducesInvalidCoin()
         {
-            //Create a service with the USD Currency (could mock in future)
+            //Create a service with the USD Currency (could mock with more time)
             ICoinValueService service = new CoinValueService(new USDCurrency());
 
             CoinValueViewModel coinValue = service.GetCoinValue(0, 0);
