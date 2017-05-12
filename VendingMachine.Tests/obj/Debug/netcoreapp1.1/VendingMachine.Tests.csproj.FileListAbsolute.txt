@@ -11,3 +11,16 @@
 /home/antony/Code/CS/VendingMachine/VendingMachine.Tests/obj/Debug/netcoreapp1.1/VendingMachine.Tests.AssemblyInfo.cs
 /home/antony/Code/CS/VendingMachine/VendingMachine.Tests/obj/Debug/netcoreapp1.1/VendingMachine.Tests.dll
 /home/antony/Code/CS/VendingMachine/VendingMachine.Tests/obj/Debug/netcoreapp1.1/VendingMachine.Tests.pdb
+/Users/antony/Code/CS/VendingMachine/VendingMachine.Tests/bin/Debug/netcoreapp1.1/VendingMachine.Tests.deps.json
+/Users/antony/Code/CS/VendingMachine/VendingMachine.Tests/bin/Debug/netcoreapp1.1/VendingMachine.Tests.runtimeconfig.json
+/Users/antony/Code/CS/VendingMachine/VendingMachine.Tests/bin/Debug/netcoreapp1.1/VendingMachine.Tests.runtimeconfig.dev.json
+/Users/antony/Code/CS/VendingMachine/VendingMachine.Tests/obj/Debug/netcoreapp1.1/VendingMachine.Tests.AssemblyInfo.cs
+/Users/antony/Code/CS/VendingMachine/VendingMachine.Tests/obj/Debug/netcoreapp1.1/VendingMachine.Tests.dll
+/Users/antony/Code/CS/VendingMachine/VendingMachine.Tests/obj/Debug/netcoreapp1.1/VendingMachine.Tests.pdb
+/Users/antony/Code/CS/VendingMachine/VendingMachine.Tests/bin/Debug/netcoreapp1.1/xunit.runner.visualstudio.dotnetcore.testadapter.dll
+/Users/antony/Code/CS/VendingMachine/VendingMachine.Tests/bin/Debug/netcoreapp1.1/xunit.runner.utility.netstandard15.dll
+/Users/antony/Code/CS/VendingMachine/VendingMachine.Tests/bin/Debug/netcoreapp1.1/xunit.runner.reporters.netstandard15.dll
+/Users/antony/Code/CS/VendingMachine/VendingMachine.Tests/bin/Debug/netcoreapp1.1/VendingMachine.Tests.dll
+/Users/antony/Code/CS/VendingMachine/VendingMachine.Tests/bin/Debug/netcoreapp1.1/VendingMachine.Tests.pdb
+/Users/antony/Code/CS/VendingMachine/VendingMachine.Tests/bin/Debug/netcoreapp1.1/VendingMachine.dll
+/Users/antony/Code/CS/VendingMachine/VendingMachine.Tests/bin/Debug/netcoreapp1.1/VendingMachine.pdb

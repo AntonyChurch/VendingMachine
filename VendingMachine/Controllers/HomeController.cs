@@ -27,8 +27,6 @@ namespace VendingMachine.Controllers
         [HttpPost]
         public IActionResult Index(IndexViewModel model)
         {
-            
-
             return View(model);
         }
 
