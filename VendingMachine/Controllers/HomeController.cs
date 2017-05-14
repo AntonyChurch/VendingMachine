@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using VendingMachine.Currencies;
 using VendingMachine.Services;
 using VendingMachine.ViewModels;
 
@@ -12,17 +13,20 @@ namespace VendingMachine.Controllers
     {
         private ISessionService _sessionService;
         private ICoinValueService _coinValueService;
+        private ICurrency _currency;
         private IItemService _itemService;
         private IPurchaseService _purchaseService;
 
         public HomeController(
             ISessionService sessionService,
             ICoinValueService coinValueService,
+            ICurrency currency,
             IItemService itemService,
             IPurchaseService purchaseService)
         {
             _sessionService = sessionService;
             _coinValueService = coinValueService;
+            _currency = currency;
             _itemService = itemService;
             _purchaseService = purchaseService;
         }
@@ -32,6 +36,7 @@ namespace VendingMachine.Controllers
             IndexViewModel viewModel = new IndexViewModel();
             viewModel.SessionId = Guid.NewGuid();
             viewModel.Items = _itemService.GetItems();
+            viewModel.AvailableCoins = _currency.GetItems();
 
             _sessionService.StoreCurrentTally(viewModel.SessionId, 0);
             
