@@ -25,9 +25,10 @@ namespace VendingMachine.Tests.Services
         {
             ISessionService service = new InMemorySessionService();
             Guid sessionId = Guid.NewGuid();
-            service.StoreCurrentTally(sessionId, 1);
+            double tally = 1;
+            service.StoreCurrentTally(sessionId, tally);
 
-            Assert.True(service.GetStoredTally(sessionId) == 1);
+            Assert.True(service.GetStoredTally(sessionId) == tally);
             Assert.True(service.GetStoredTally(Guid.Empty) == -1);
 
         }
