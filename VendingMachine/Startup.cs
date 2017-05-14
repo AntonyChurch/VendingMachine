@@ -43,6 +43,9 @@ namespace VendingMachine
             services.AddTransient<IItemRepository, ItemRepository>();
             services.AddTransient<IItemService, ItemService>();
 
+            //Add Purchase service
+            services.AddTransient<IPurchaseService, PurchaseService>();
+
             //Add Default Currency and CoinService to DI
             services.AddTransient<ICurrency, USDCurrency>();
 
