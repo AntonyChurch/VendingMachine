@@ -48,8 +48,10 @@ namespace VendingMachine
 
             //Add Default Currency and CoinService to DI
             services.AddTransient<ICurrency, USDCurrency>();
-
             services.AddTransient<ICoinValueService, CoinValueService>();
+
+            //Add ChangeService
+            services.AddTransient<IChangeService, ChangeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

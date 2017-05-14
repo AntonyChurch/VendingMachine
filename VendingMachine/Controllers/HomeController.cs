@@ -39,9 +39,13 @@ namespace VendingMachine.Controllers
             if(change.HasValue)
             {
                 //Add change to view model
-                int i = 0;
-                i += 1;
+                
             }
+
+            if(itemId.HasValue)
+            {
+                viewModel.ItemsToCollect.Add(_itemService.GetItems()[itemId.Value].Name);
+            }                
 
             _sessionService.StoreCurrentTally(viewModel.SessionId, 0);
             
