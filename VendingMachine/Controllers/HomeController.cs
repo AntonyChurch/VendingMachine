@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using VendingMachine.Currencies;
 using VendingMachine.Models;
@@ -14,19 +15,22 @@ namespace VendingMachine.Controllers
         private ICurrency _currency;
         private IItemService _itemService;
         private IPurchaseService _purchaseService;
+        private IChangeService _changeService;
 
         public HomeController(
             ISessionService sessionService,
             ICoinValueService coinValueService,
             ICurrency currency,
             IItemService itemService,
-            IPurchaseService purchaseService)
+            IPurchaseService purchaseService,
+            IChangeService changeService)
         {
             _sessionService = sessionService;
             _coinValueService = coinValueService;
             _currency = currency;
             _itemService = itemService;
             _purchaseService = purchaseService;
+            _changeService = changeService;
         }
 
         public IActionResult Index(double? change, int? itemId)
@@ -38,8 +42,7 @@ namespace VendingMachine.Controllers
 
             if(change.HasValue)
             {
-                //Add change to view model
-                
+                viewModel.CoinsToCollect = _changeService.ChangeList(change.Value).Select(c => c.Value.ToString("C")).ToList();
             }
 
             if(itemId.HasValue)
@@ -50,6 +53,11 @@ namespace VendingMachine.Controllers
             _sessionService.StoreCurrentTally(viewModel.SessionId, 0);
             
             return View(viewModel);
+        }
+
+        public IActionResult ReturnCoins(Guid sessionId)
+        {
+            return RedirectToAction("Index", new { change = _sessionService.GetStoredTally(sessionId) });
         }
 
         [HttpPost]
