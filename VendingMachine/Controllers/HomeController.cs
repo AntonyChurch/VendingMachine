@@ -10,16 +10,23 @@ namespace VendingMachine.Controllers
 {
     public class HomeController : Controller
     {
+        private ISessionService _sessionService;
         private ICoinValueService _coinValueService;
 
-        public HomeController(ICoinValueService coinValueService)
+        public HomeController(
+            ISessionService sessionService,
+            ICoinValueService coinValueService)
         {
+            _sessionService = sessionService;
             _coinValueService = coinValueService;
         }
 
         public IActionResult Index()
         {
             IndexViewModel viewModel = new IndexViewModel();
+            viewModel.SessionId = Guid.NewGuid();
+
+            _sessionService.StoreCurrentTally(viewModel.SessionId, 0);
             
             return View(viewModel);
         }
@@ -27,13 +34,30 @@ namespace VendingMachine.Controllers
         [HttpPost]
         public IActionResult Index(IndexViewModel model)
         {
+
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult GetCoinValue(double coinWeight, double coinSize)
+        public IActionResult GetCoinValue(double coinWeight, double coinSize, Guid sessionId)
         {
-            return Json(_coinValueService.GetCoinValue(coinWeight, coinSize));
+            var coinValue = _coinValueService.GetCoinValue(coinWeight, coinSize);
+
+            if(coinValue.IsValidCoin)
+            {
+                double currentTally = _sessionService.GetStoredTally(sessionId);
+                //Session does not exist, so create a new one with the coin value.
+                if(currentTally > -1)
+                {
+                    _sessionService.StoreCurrentTally(sessionId, currentTally + coinValue.CoinValue.Value);
+                }
+                else
+                {
+                    _sessionService.StoreCurrentTally(sessionId, coinValue.CoinValue.Value);
+                }
+            }
+
+            return Json(new { CoinValue = coinValue.IsValidCoin, NewTotal = _sessionService.GetStoredTally(sessionId), SessionId = sessionId});
         }
 
         public IActionResult Error()

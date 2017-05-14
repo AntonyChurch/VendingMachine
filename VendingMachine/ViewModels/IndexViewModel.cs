@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 
 namespace VendingMachine.ViewModels
 {
     public class IndexViewModel
     {
+        public Guid SessionId { get; set; }
         public double UserTotal { get; set; }
         public double CoinValue { get; set; }
         public string ItemName { get; set; }
