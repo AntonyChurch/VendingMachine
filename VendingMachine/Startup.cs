@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using VendingMachine.Currencies;
+using VendingMachine.Repositories;
 using VendingMachine.Services;
 
 namespace VendingMachine
@@ -38,7 +39,8 @@ namespace VendingMachine
             //Register the In memory session service
             services.AddTransient<ISessionService, InMemorySessionService>();
 
-            //Add ItemService
+            //Add ItemRepository and ItemService
+            services.AddTransient<IItemRepository, ItemRepository>();
             services.AddTransient<IItemService, ItemService>();
 
             //Add Default Currency and CoinService to DI
