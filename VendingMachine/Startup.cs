@@ -38,6 +38,9 @@ namespace VendingMachine
             //Register the In memory session service
             services.AddTransient<ISessionService, InMemorySessionService>();
 
+            //Add ItemService
+            services.AddTransient<IItemService, ItemService>();
+
             //Add Default Currency and CoinService to DI
             services.AddTransient<ICurrency, USDCurrency>();
 

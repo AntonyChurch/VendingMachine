@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using VendingMachine.Models;
 
 namespace VendingMachine.ViewModels
 {
@@ -12,11 +13,13 @@ namespace VendingMachine.ViewModels
         public double ItemCost { get; set; }
         public List<string> ItemsToCollect { get; set; }
         public List<string> CoinsToCollect { get; set; }
+        public List<ItemModel> Items { get; set; }
 
         public IndexViewModel()
         {
             ItemsToCollect = new List<string>();
             CoinsToCollect = new List<string>();
+            Items = new List<ItemModel>();
         }
     }
 }
