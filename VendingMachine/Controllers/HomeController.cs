@@ -12,19 +12,26 @@ namespace VendingMachine.Controllers
     {
         private ISessionService _sessionService;
         private ICoinValueService _coinValueService;
+        private IItemService _itemService;
+        private IPurchaseService _purchaseService;
 
         public HomeController(
             ISessionService sessionService,
-            ICoinValueService coinValueService)
+            ICoinValueService coinValueService,
+            IItemService itemService,
+            IPurchaseService purchaseService)
         {
             _sessionService = sessionService;
             _coinValueService = coinValueService;
+            _itemService = itemService;
+            _purchaseService = purchaseService;
         }
 
         public IActionResult Index()
         {
             IndexViewModel viewModel = new IndexViewModel();
             viewModel.SessionId = Guid.NewGuid();
+            viewModel.Items = _itemService.GetItems();
 
             _sessionService.StoreCurrentTally(viewModel.SessionId, 0);
             
