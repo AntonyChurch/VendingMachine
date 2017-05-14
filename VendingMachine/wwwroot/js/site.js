@@ -30,7 +30,6 @@ var coinWeightReady = false;
 var coinWeightChange = function(){
     var currentValue = $(this).val();
     var valueFloat = parseFloat(currentValue);
-    console.log(valueFloat);
     if(!isNaN(valueFloat)){
         coinWeightReady = true;
         if(coinSizeReady){
@@ -50,7 +49,6 @@ var coinSizeReady = false;
 var coinSizeChange = function(){
     var currentValue = $(this).val();
     var valueFloat = parseFloat(currentValue);
-    console.log(valueFloat);
     if(!isNaN(valueFloat)){
         coinSizeReady = true;
         if(coinWeightReady){

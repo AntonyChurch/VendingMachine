@@ -64,7 +64,7 @@
                     @foreach(var coin in Model.AvailableCoins)
                     {
                         <tr>
-                            <td>@coin.Value</td>
+                            <td>@coin.Value.ToString("C")</td>
                             <td>@coin.MaxWeight</td>
                             <td>@coin.MinWeight</td>
                             <td>@coin.MaxSize</td>

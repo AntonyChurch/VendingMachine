@@ -42,6 +42,8 @@ namespace VendingMachine.Controllers
 
             if(change.HasValue)
             {
+                //Round to 2 digits because javascript can sometimes mess up the float
+                change = Math.Round(change.Value, 2);
                 viewModel.CoinsToCollect = _changeService.ChangeList(change.Value).Select(c => c.Value.ToString("C")).ToList();
             }
 
