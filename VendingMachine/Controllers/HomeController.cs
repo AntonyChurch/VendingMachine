@@ -1,9 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using VendingMachine.Currencies;
+using VendingMachine.Models;
 using VendingMachine.Services;
 using VendingMachine.ViewModels;
 
@@ -31,12 +29,19 @@ namespace VendingMachine.Controllers
             _purchaseService = purchaseService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(double? change, int? itemId)
         {
             IndexViewModel viewModel = new IndexViewModel();
             viewModel.SessionId = Guid.NewGuid();
             viewModel.Items = _itemService.GetItems();
             viewModel.AvailableCoins = _currency.GetItems();
+
+            if(change.HasValue)
+            {
+                //Add change to view model
+                int i = 0;
+                i += 1;
+            }
 
             _sessionService.StoreCurrentTally(viewModel.SessionId, 0);
             
@@ -44,14 +49,7 @@ namespace VendingMachine.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(IndexViewModel model)
-        {
-
-            return View(model);
-        }
-
-        [HttpPost]
-        public IActionResult GetCoinValue(double coinWeight, double coinSize, Guid sessionId)
+        public IActionResult InsertCoin(double coinWeight, double coinSize, Guid sessionId)
         {
             var coinValue = _coinValueService.GetCoinValue(coinWeight, coinSize);
 
@@ -59,7 +57,7 @@ namespace VendingMachine.Controllers
             {
                 double currentTally = _sessionService.GetStoredTally(sessionId);
                 //Session does not exist, so create a new one with the coin value.
-                if(currentTally > -1)
+                if(currentTally > 0)
                 {
                     _sessionService.StoreCurrentTally(sessionId, currentTally + coinValue.CoinValue.Value);
                 }
@@ -69,7 +67,26 @@ namespace VendingMachine.Controllers
                 }
             }
 
-            return Json(new { CoinValue = coinValue.IsValidCoin, NewTotal = _sessionService.GetStoredTally(sessionId), SessionId = sessionId});
+            return Json(new { 
+                CoinValue = coinValue.IsValidCoin, 
+                NewTotal = _sessionService.GetStoredTally(sessionId),
+                NewTotalString = _sessionService.GetStoredTally(sessionId).ToString("C")
+                });
+        }
+
+        [HttpPost]
+        public IActionResult BuyProduct(Guid sessionId, int itemId)
+        {
+            ItemModel item = _itemService.GetItems()[itemId];
+
+            if(_purchaseService.CanAffordProduct(sessionId, itemId) < 0)
+            {
+                return Json(new { CanAfford = false, DisplayText = String.Format("PRICE {0}", item.Price.ToString("C"))});
+            }           
+
+            double newCredit = _purchaseService.BuyProduct(sessionId, itemId);
+
+            return Json(new { CanAfford = true, Balance = newCredit});
         }
 
         public IActionResult Error()

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Home Page";
 }
 
-<input type="hidden" value="@Model.SessionId"/>
+<input type="hidden" id="SessionId" value="@Model.SessionId"/>
 
 <div class="row vending-machine-items-container">
     @foreach(var item in Model.Items)
@@ -36,17 +36,17 @@
     <div class="col-md-6 form-horizontal">                
         <div class="form-group">
             <label for="coin-weight">Coin Weight</label>
-            <input id="coin-weight" name="coin-weight" class="form-control" type="number" placeholder="Coin Weight"/>
+            <input id="coin-weight" name="coin-weight" class="form-control" type="text" placeholder="Coin Weight"/>
         </div>
         <div class="form-group">
             <label for="coin-size">Coin Size</label>
-            <input id="coin-size" name="coin-size" class="form-control" type="number" placeholder="Coin Size"/>
+            <input id="coin-size" name="coin-size" class="form-control" type="text" placeholder="Coin Size"/>
         </div>
         <div class="form-group">
-            <button id="deposit-button" class="btn btn-primary" disabled>Depoit Coin</button>
+            <button id="deposit-button" class="btn btn-primary">Depoit Coin</button>
         </div>
         <div class="form-group">
-            <button id="return-coins-button" class="btn btn-danger">Return Coins</button>
+            <a href="/Home/ReturnCoins?sessionId=@Model.SessionId" id="return-coins-button" class="btn btn-danger">Return Coins</a>
         </div>
         <div class="form-group">
             <label for="coins">Available Coins</label>
@@ -123,8 +123,3 @@
         </div>
     </div>
 </div>
-
-@section Scripts{
-    <script>
-    </script>
-}

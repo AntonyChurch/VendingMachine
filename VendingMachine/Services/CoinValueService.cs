@@ -18,10 +18,10 @@ namespace VendingMachine.Services
 
             foreach(CurrencyItem currencyItem in _currency.GetItems())
             {
-                if(currencyItem.MaxWeight > coinWeight
-                && currencyItem.MinWeight < coinWeight
-                && currencyItem.MaxSize > coinSize
-                && currencyItem.MinSize < coinSize)
+                if(currencyItem.MaxWeight >= coinWeight
+                && currencyItem.MinWeight <= coinWeight
+                && currencyItem.MaxSize >= coinSize
+                && currencyItem.MinSize <= coinSize)
                 {
                     model.CoinValue = currencyItem.Value;
                 }
